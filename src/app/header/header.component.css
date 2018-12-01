@@ -1,0 +1,29 @@
+.header {
+    background-color: #7700b7;
+    height: 4rem;
+    display: flex;
+    color: rgb(255, 255, 255, 0.87);
+    
+}
+
+.empty-block {
+    width: 2rem;
+}
+
+.header-toggle {
+    text-align: center;
+    vertical-align:middle;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.toggle-icon {
+    font-size: 1rem;
+}
+
+.header-label {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 1.3rem;
+    margin-left: .5rem;
+}
