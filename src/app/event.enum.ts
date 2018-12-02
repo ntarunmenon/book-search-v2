@@ -1,0 +1,5 @@
+export enum EventType {
+    MENU_CLICKED,
+    MENU_MYCOLLECTION_CLICKED,
+    MENU_BROWSE_CLICKED
+}

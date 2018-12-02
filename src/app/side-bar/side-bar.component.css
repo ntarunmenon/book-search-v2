@@ -1,0 +1,46 @@
+.side-bar {
+    position: fixed;
+    height: 100%;
+    width: 25%;
+    background-color: white;
+    z-index: 3;
+    top: 0;
+    display: none;
+}
+
+.side-bar-section:hover {
+    cursor: pointer;
+}
+.side-bar-section {
+    display: flex;
+    height: 4.5rem;
+    justify-content: center;
+    padding: 2rem; 
+}
+
+.bookmark {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   
+}
+
+.side-bar-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1rem;
+    flex-grow: 2;
+}
+
+.side-bar-section-title {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 1rem;
+    color: black;
+}
+
+.side-bar-section-description {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+}

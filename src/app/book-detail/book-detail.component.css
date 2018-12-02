@@ -1,0 +1,52 @@
+.book-detail {
+    width: 37.5rem;
+    height: 23.35rem;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem;
+    margin-top: 3rem;
+}
+
+.book-item-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.book-item-image {
+    flex: initial;
+    height  : 5rem;
+    width: 3.6rem;
+    margin-left: auto;
+}
+
+.book-item-image img {
+    min-width: 100%;
+    max-height: 100%;
+}
+
+.book-item-author{
+   flex-grow: 1;
+}
+
+.book-item-author-author_name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.modify-collection {
+    position: absolute;
+    bottom: .5rem;
+}
+
+.removebook {
+    background-color: red;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight:500;
+    color: white;
+    padding: 0.5rem;
+}

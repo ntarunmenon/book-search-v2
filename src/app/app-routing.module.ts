@@ -7,7 +7,7 @@ import { RouterModule, Routes }  from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'books', component: BookListComponent },
-  { path: 'bookDetail',        component: BookDetailComponent },
+  { path: 'bookDetail/:id',        component: BookDetailComponent },
   { path: '',   redirectTo: '/books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

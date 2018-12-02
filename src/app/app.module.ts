@@ -10,6 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { BookListComponent } from './book-list/book-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BookItemComponent } from './book-list/book-item/book-item.component';
+import { MyCollectionService } from './my-collection.service';
 
 @NgModule({
   declarations: [

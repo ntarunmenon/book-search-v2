@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { EventService } from '../event.service';
+import { EventType } from '../event.enum';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventService:EventService) { }
 
   ngOnInit() {
   }
 
+  menuClicked(){
+    this.eventService.menuClickedEvent(EventType.MENU_CLICKED);
+  }
 }

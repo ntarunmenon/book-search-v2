@@ -1,0 +1,16 @@
+<aside class="side-bar" [style.display] ="showMenu">
+        <div class="side-bar-section" (click)="myCollectionClicked()">
+                <div class="bookmark"><i class="fas fa-bookmark fa-lg"></i></div>
+                <div class="side-bar-text">
+                    <div class="side-bar-section-title">My Collection</div>
+                    <div class="side-bar-section-description">View your book collection</div>
+                </div>   
+            </div>
+            <div class="side-bar-section" (click)="browseClicked()"> 
+                    <div class="bookmark"><i class="fas fa-search fa-lg"></i></div>
+                    <div class="side-bar-text">
+                        <div class="side-bar-section-title">Browse Books</div>
+                        <div class="side-bar-section-description">Find your next book!</div>
+                    </div>   
+                </div>
+    </aside>
