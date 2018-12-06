@@ -1,1 +1,7 @@
-<section class="top-panel"><p>My Collection</p></section>
+<section class="top-panel">
+    <div *ngIf="myCollectionClicked">My Collection</div>
+    <div *ngIf="!myCollectionClicked">Find Books</div>
+    <div *ngIf="!myCollectionClicked" class="search-section">
+            <input class = "search-input" placeholder="Search books" type="text" 
+            (keyup)="searchTerm$.next($event.target.value)"/></div>
+</section>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Book } from './book';
 export class MyCollectionService {
 
   private books:Book[] = [];
+  myCollectionBooks$ : Observable<Book[]> 
   
   constructor() { 
     
@@ -17,11 +19,10 @@ export class MyCollectionService {
         to the works of Richard Bach, and is aimed at the young and old alike.`,
     author:'Paulo Coelho',
     url:'http://books.google.com/books/content?id=6bBPrgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'}
+    this.myCollectionBooks$
+ = of(this.books);
   }
 
-  public getBooks():Book[]{
-    return this.books.slice();
-  }
 
   public getBookById(id:string):Book {
     return this.books.find(book => book.id === id);
