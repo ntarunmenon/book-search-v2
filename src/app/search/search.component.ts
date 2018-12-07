@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
 import { EventType } from '../event.enum';
+import { Subject } from 'rxjs';
+import { BrowseBooksService } from '../browse-books.service';
+import { Book } from '../book';
 
 @Component({
   selector: 'app-search',
@@ -10,10 +13,14 @@ import { EventType } from '../event.enum';
 export class SearchComponent implements OnInit {
 
   myCollectionClicked:boolean = true;
+  searchTerm$ = new Subject<string>();
   
-  constructor(private eventService:EventService) { }
+  
+  constructor(private eventService:EventService,
+    private booksService:BrowseBooksService) { }
 
   ngOnInit() {
+     this.booksService.setSerchTerm(this.searchTerm$);
 
     this.eventService.menuClikced$.subscribe(
       eventType => {

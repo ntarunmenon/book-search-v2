@@ -15,9 +15,9 @@ import { EventType } from '../event.enum';
 export class BookListComponent implements OnInit,OnDestroy {
 
   private myCollectionSubscription: Subscription;
-  private myCollectionBooks: Book[];
+  private myCollectionBooks: Book[] = [];
   private searchBooksSubscription: Subscription;
-  private searchResultsList: Book[];
+  private searchResultsList: Book[] = [];
   private books: Book[];
 
   constructor(private myCollectionService:MyCollectionService,
@@ -33,7 +33,9 @@ export class BookListComponent implements OnInit,OnDestroy {
     );
     this.searchBooksSubscription = this.browseBooksService.searchResults$.subscribe(
       books => {
+        console.log(`books ${books}`)
         this.searchResultsList = books;
+        this.books = books;
       }
     );
     this.eventService.menuClikced$.subscribe(
@@ -41,7 +43,8 @@ export class BookListComponent implements OnInit,OnDestroy {
         if (eventType === EventType.MENU_MYCOLLECTION_CLICKED){
             this.books = this.myCollectionBooks.slice();
         } else if (eventType === EventType.MENU_BROWSE_CLICKED) {
-            this.books = this.searchResultsList.slice();
+          console.log('Inside browse clicked');  
+          this.books = this.searchResultsList.slice();
         }
       }
     );
