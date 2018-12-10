@@ -17,7 +17,7 @@ export class SideBarComponent implements OnInit,OnDestroy {
     this.subscription = this.eventService.menuClikced$.subscribe
       (event => {
         switch (event) {
-          case EventType.MENU_CLICKED: {
+          case EventType.MENU_BROWSE_CLICKED: {
             this.showMenu = "block";
             break;
           }

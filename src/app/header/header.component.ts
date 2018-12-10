@@ -15,6 +15,6 @@ export class HeaderComponent implements OnInit {
   }
 
   menuClicked(){
-    this.eventService.menuClickedEvent(EventType.MENU_CLICKED);
+    this.eventService.menuClickedEvent(EventType.MENU_BROWSE_CLICKED);
   }
 }

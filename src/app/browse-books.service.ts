@@ -9,14 +9,14 @@ import { concatAll, debounceTime, toArray, distinctUntilChanged, switchMap,map, 
 })
 export class BrowseBooksService {
   
+  
+  
   SEARCH_URL = 'https://www.googleapis.com/books/v1/volumes';
   private books:Book[] = [];
-  searchResults$ : Observable<Book[]> 
+  searchResults$ : Observable<Book[]>  = of([]);
   private searchTerms$: Observable<string>;
  
-  constructor(private http: HttpClient) {
-    this.searchResults$ = of([])
-  }
+  constructor(private http: HttpClient) {}
 
   search() {
     this.searchResults$ =  this.searchTerms$.pipe(
@@ -25,11 +25,13 @@ export class BrowseBooksService {
        , filter(term => term.length > 4 )
        , switchMap(term => this.performsearch(term))
     );
+    this.searchResults$.subscribe(books => 
+      {
+        this.books = books;
+      });
   }
 
   performsearch(searchTerms:string):Observable<Book[]>{
-    console.log(`searching with ${searchTerms}`);
-
     return this.http.get(this.SEARCH_URL, {
       params: {
           q:searchTerms
@@ -47,6 +49,12 @@ export class BrowseBooksService {
         }
     }),
     toArray());
+  }
+
+  getBookById(id: string): Book {
+    console.log(`books from search is ${this.books}`)
+    console.log(this.books);
+    return this.books.find(book => book.id === id);
   }
 
   setSerchTerm(searchTerm : Observable<string>){

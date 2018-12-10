@@ -4,6 +4,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Book } from '../book';
+import { BooksService } from '../books.service';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
@@ -13,16 +14,18 @@ export class BookDetailComponent implements OnInit {
 
   book:Book;
   canRemoveFromCollection: boolean = true;
-
-  constructor(private myCollectionService: MyCollectionService,
-    private route:ActivatedRoute) { }
+  
+  constructor(private booksService: BooksService,
+    private route:ActivatedRoute,
+    private myCollectionService:MyCollectionService) { }
 
   ngOnInit() {
     this.route
     .paramMap.pipe(
       switchMap((params:ParamMap) => of(params.get('id')))
     ).subscribe((id) => {
-      this.book = this.myCollectionService.getBookById(id);
+      this.book = this.booksService.getBookById(id);
+      console.log(`book is ${this.book}`);
     })
   }
 

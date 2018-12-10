@@ -33,7 +33,6 @@ export class BookListComponent implements OnInit,OnDestroy {
     );
     this.searchBooksSubscription = this.browseBooksService.searchResults$.subscribe(
       books => {
-        console.log(`books ${books}`)
         this.searchResultsList = books;
         this.books = books;
       }
@@ -43,7 +42,6 @@ export class BookListComponent implements OnInit,OnDestroy {
         if (eventType === EventType.MENU_MYCOLLECTION_CLICKED){
             this.books = this.myCollectionBooks.slice();
         } else if (eventType === EventType.MENU_BROWSE_CLICKED) {
-          console.log('Inside browse clicked');  
           this.books = this.searchResultsList.slice();
         }
       }
