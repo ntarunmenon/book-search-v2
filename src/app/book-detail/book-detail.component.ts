@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Book } from '../book';
 import { BooksService } from '../books.service';
+import { EventType } from '../event.enum';
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
@@ -13,7 +14,7 @@ import { BooksService } from '../books.service';
 export class BookDetailComponent implements OnInit {
 
   book:Book;
-  canRemoveFromCollection: boolean = true;
+  canRemoveFromCollection: boolean = false;
   
   constructor(private booksService: BooksService,
     private route:ActivatedRoute,
@@ -25,7 +26,9 @@ export class BookDetailComponent implements OnInit {
       switchMap((params:ParamMap) => of(params.get('id')))
     ).subscribe((id) => {
       this.book = this.booksService.getBookById(id);
-      console.log(`book is ${this.book}`);
+      if(this.booksService.getEventType() === EventType.MENU_MYCOLLECTION_CLICKED){
+        this.canRemoveFromCollection = true;
+      }
     })
   }
 

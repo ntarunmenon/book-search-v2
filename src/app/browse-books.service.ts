@@ -3,13 +3,12 @@ import { Book } from './book';
 import { Observable, of, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { concatAll, debounceTime, toArray, distinctUntilChanged, switchMap,map, filter} from 'rxjs/operators';
+import _ from "lodash";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrowseBooksService {
-  
-  
   
   SEARCH_URL = 'https://www.googleapis.com/books/v1/volumes';
   private books:Book[] = [];
@@ -39,12 +38,20 @@ export class BrowseBooksService {
   }).pipe(
     map(data => data['items'])
     ,concatAll()
+    ,filter (data => {
+       if(_.hasIn(data,'volumeInfo.title')
+       && _.hasIn(data,'volumeInfo.imageLinks.smallThumbnail')
+       && _.hasIn(data,'searchInfo.textSnippet')){
+         console.log(data);
+         return true;
+       }
+    })
     , map(data => {
         return {
             id: data['id'],
             title: data['volumeInfo'].title,
             url: data['volumeInfo'].imageLinks.smallThumbnail,
-            description: data.hasOwnProperty('searchInfo') ? data['searchInfo'].textSnippet:"",
+            description: data['searchInfo'].textSnippet,
             author: data['volumeInfo'].authors
         }
     }),
@@ -52,14 +59,16 @@ export class BrowseBooksService {
   }
 
   getBookById(id: string): Book {
-    console.log(`books from search is ${this.books}`)
-    console.log(this.books);
     return this.books.find(book => book.id === id);
   }
 
   setSerchTerm(searchTerm : Observable<string>){
       this.searchTerms$ = searchTerm;
       this.search();
+  }
+
+  getBooks():Book[] {
+    return this.books;
   }
 }
 

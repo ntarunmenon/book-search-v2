@@ -6,6 +6,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { BrowseBooksService } from '../browse-books.service';
 import { EventService } from '../event.service';
 import { EventType } from '../event.enum';
+import { BooksService } from '../books.service';
 
 @Component({
   selector: 'app-book-list',
@@ -18,10 +19,11 @@ export class BookListComponent implements OnInit,OnDestroy {
   private myCollectionBooks: Book[] = [];
   private searchBooksSubscription: Subscription;
   private searchResultsList: Book[] = [];
-  private books: Book[];
+  private books: Book[] = [];
 
   constructor(private myCollectionService:MyCollectionService,
     private browseBooksService:BrowseBooksService,
+    private booksService:BooksService,
     private eventService:EventService) { }
 
   ngOnInit() {
@@ -37,15 +39,14 @@ export class BookListComponent implements OnInit,OnDestroy {
         this.books = books;
       }
     );
+
     this.eventService.menuClikced$.subscribe(
-      eventType => {
-        if (eventType === EventType.MENU_MYCOLLECTION_CLICKED){
-            this.books = this.myCollectionBooks.slice();
-        } else if (eventType === EventType.MENU_BROWSE_CLICKED) {
-          this.books = this.searchResultsList.slice();
-        }
-      }
-    );
+      eventType => this.books = this.booksService.getBooks());
+    
+      if(this.books.length == 0) {
+      this.books = this.booksService.getBooks();
+    }
+   
   }
 
   ngOnDestroy(){

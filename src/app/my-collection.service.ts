@@ -12,15 +12,6 @@ export class MyCollectionService {
   myCollectionBooks$ = this.booksSubject.asObservable();
   
   constructor() { 
-    
-    this.books[0] = {id:"1",
-    title:'The Alchemist',
-    description:  `This is an adventure story about a young shepherd 
-        boy who learns how to live his dreams. This is a story which has been compared 
-        to the works of Richard Bach, and is aimed at the young and old alike.`,
-    author:'Paulo Coelho',
-    url:'http://books.google.com/books/content?id=6bBPrgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'}
-    this.myCollectionBooks$ = of(this.books);
   }
 
 
@@ -37,5 +28,9 @@ export class MyCollectionService {
     let index = +this.books.find(book => book.id === id);
     this.books.splice(index,1);
     this.booksSubject.next(this.books);
+  }
+
+  getBooks():Book[]{
+    return this.books;
   }
 }
